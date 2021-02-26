@@ -3,6 +3,8 @@
 
 #include "Data.hpp"
 #include <iostream>
+#include <memory>
+using namespace std;
 
 template <class T> 
 struct Node 
@@ -10,9 +12,13 @@ struct Node
     const static int ORDER = 4; 
 
     int numItems; 
-    Data<T>* vals[ORDER-1]; // consider wrapping in struct
-
+    // Unique pointer because this data is only contained and managed within 
+    // this instance of a node(?)
+    // Data<T>* vals[ORDER-1]; // consider wrapping in struct
+    unique_ptr<Data<T>> vals[ORDER-1];
+    // Parent would be a shared pointer because multiple nodes can have the same parent. 
     Node<T>* parent;
+    // Childs would be unique pointers because a parent is the owner of the childs. 
     Node<T>* childs[ORDER];
 
     Node<T>() 
@@ -36,21 +42,8 @@ struct Node
 
     bool isLeaf()
     {
-        // for (auto child : childs)
-        // {
-        //     if (child != nullptr)
-        //     {
-        //         return false;
-        //     }
-        // }
-
-        // return true;
-
-
-
         // Alternative...
         return childs[0] == nullptr; 
-        
     }
 
     bool isSingleNodeInTree()
@@ -63,7 +56,7 @@ struct Node
         return this->parent;
     }
 
-    int insertItem(Data<T>* newData)
+    int insertItem(unique_ptr<Data<T>> newData)
     {
         numItems++;
 
@@ -77,33 +70,27 @@ struct Node
             {
                 if (newData->val < vals[i]->val)
                 {
-                    // for (int j = 0; j < numItems; j++)
-                    // {
-                    //     std::cout << vals[j]->val << std::endl;
-                    // }
-
-                    vals[i+1] = vals[i];
+                    vals[i+1] = move(vals[i]);
                 }
                 else 
                 {
-                    vals[i+1] = newData;
+                    vals[i+1] = move(newData);
                     return i + 1;
                 }
             }
-            
         }
 
-        vals[0] = newData;
+        vals[0] = move(newData);
         return 0;
     }
 
-    Data<T>* removeItem()
+    unique_ptr<Data<T>> removeItem()
     {
-        Data<T>* data = vals[numItems - 1]; 
-        vals[numItems - 1] = nullptr;
+        unique_ptr<Data<T>> data = move(vals[numItems - 1]); 
+        vals[numItems - 1] = move(nullptr);
         numItems--;
 
-        return data; 
+        return move(data); 
     }
 
     Node<T>* disconnectChild(int childNum)
@@ -171,22 +158,22 @@ struct Node
             }
         }
 
-        delete vals[numItems-1]; 
-        vals[numItems-1] = nullptr;
+        // delete vals[numItems-1]; 
+        vals[numItems-1] = move(nullptr);
         numItems--;
     }
 
-    void insertAtFront(Data<T>* d)
+    void insertAtFront(unique_ptr<Data<T>> d)
     {
         numItems++; 
         for (int j = numItems - 1; j > 0; j--)
         {
-            vals[j] = vals[j-1];
+            vals[j] = move(vals[j-1]);
             connectChild(j + 1, disconnectChild(j));
         }
 
         connectChild(1, disconnectChild(0));
-        vals[0] = d; 
+        vals[0] = move(d); 
         connectChild(0, nullptr);
     }
 };

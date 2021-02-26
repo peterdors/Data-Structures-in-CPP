@@ -5,6 +5,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <memory>
 
 using namespace std; 
 
@@ -12,7 +13,7 @@ template <class T>
 class Tree
 {
 private:
-    Node<T>* root; 
+    Node<T>* root;
     // unique_ptr<Node<T>> root; 
     vector<Node<T>*> markedNodes;
     vector<Data<T>*> markedData;
@@ -35,11 +36,11 @@ private:
 
     void split(Node<T>* currNode)
     {
-        Data<T>* itemB, *itemC; 
+        unique_ptr<Data<T>> itemB, itemC; 
         Node<T>* parent, *child2, *child3; 
 
-        itemC = currNode->removeItem();
-        itemB = currNode->removeItem(); 
+        itemC = move(currNode->removeItem());
+        itemB = move(currNode->removeItem()); 
 
         child2 = currNode->disconnectChild(2);
         child3 = currNode->disconnectChild(3);
@@ -57,7 +58,7 @@ private:
             parent = currNode->getParent();
         }
 
-        int itemIndex = parent->insertItem(itemB);
+        int itemIndex = parent->insertItem(move(itemB));
         int n = parent->numItems;
 
         for (int i = n-1; i > itemIndex; i--)
@@ -68,7 +69,7 @@ private:
 
         parent->connectChild(itemIndex + 1, newRight);
 
-        newRight->insertItem(itemC);
+        newRight->insertItem(move(itemC));
         newRight->connectChild(0, child2);
         newRight->connectChild(1, child3);   
     }
@@ -172,11 +173,11 @@ private:
 
         for (int i = 0; i < node->numItems + 1; i++)
         {
-            if (i < node->numItems)
-            {
-                delete node->vals[i]; 
-
-            }
+            // Unique pointers will handle memory management.
+            // if (i < node->numItems)
+            // {
+            //     delete node->vals[i]; 
+            // }
 
             ForestFire(node->childs[i]);
             delete node->childs[i];
@@ -205,18 +206,18 @@ private:
                 if (p->childs[i] == sibling && sibling_side == 'l')
                 {
                     // delete node->vals[node->numItems-1]; 
-                    markedData.push_back(node->vals[node->numItems-1]);
+                    // markedData.push_back(node->vals[node->numItems-1]);
                     node->vals[node->numItems-1] = nullptr;
                     node->numItems = node->numItems - 1;
-                    Data<T>* d = p->vals[i];
-                    sibling->insertItem(d);
+                    unique_ptr<Data<T>> d = move(p->vals[i]);
+                    sibling->insertItem(move(d));
                     p->disconnectChild(i + 1);
 
                     for (int j = i; j < p->numItems; j++)
                     {
                         if (j + 1 < p->numItems)
                         {
-                            p->vals[j] = p->vals[j+1];
+                            p->vals[j] = move(p->vals[j+1]);
                             if (j + 2 <= p->numItems)
                             {
                                 p->connectChild(j + 1, p->disconnectChild(j + 2));
@@ -225,7 +226,7 @@ private:
                     }
 
                     // delete p->vals[p->numItems-1];
-                    markedData.push_back(p->vals[p->numItems-1]);
+                    // markedData.push_back(p->vals[p->numItems-1]);
                     p->vals[p->numItems-1] = nullptr;
                     p->numItems = p->numItems - 1;
 
@@ -247,17 +248,17 @@ private:
                 else if (p->childs[i] == sibling && sibling_side == 'r')
                 {
                     // delete node->vals[node->numItems - 1];
-                    markedData.push_back(node->vals[node->numItems - 1]);
+                    // markedData.push_back(node->vals[node->numItems - 1]);
                     node->vals[node->numItems - 1] = nullptr;
                     node->numItems = node->numItems - 1; 
-                    Data<T>* d = p->vals[i-1];
-                    sibling->insertItem(d);
+                    unique_ptr<Data<T>> d = move(p->vals[i-1]);
+                    sibling->insertItem(move(d));
                     p->disconnectChild(0);
                     p->connectChild(0, p->disconnectChild(1));
 
                     for (int j = i; j < p->numItems; j++)
                     {
-                        p->vals[j-1] = p->vals[j];
+                        p->vals[j-1] = move(p->vals[j]);
                         if (j + 1 <= p->numItems)
                         {
                             p->connectChild(j, p->disconnectChild(j+1));
@@ -265,7 +266,7 @@ private:
                     }
 
                     // delete p->vals[p->numItems - 1];
-                    markedData.push_back(p->vals[p->numItems - 1]);
+                    // markedData.push_back(p->vals[p->numItems - 1]);
                     p->vals[p->numItems - 1] = nullptr; 
                     p->numItems = p->numItems - 1; 
 
@@ -342,8 +343,8 @@ private:
                 if (p->childs[i] == sibling && siblingSide == 'l')
                 {
                     // Merge parent and child and remove parent
-                    Data<T>* d = p->vals[i]; 
-                    sibling->insertItem(d);
+                    unique_ptr<Data<T>> d = move(p->vals[i]); 
+                    sibling->insertItem(move(d));
 
                     sibling->connectChild(sibling->numItems, node->disconnectChild(0));
                     p->disconnectChild(i+1);
@@ -352,7 +353,7 @@ private:
                     {
                         if (j + 1 < p->numItems)
                         {
-                            p->vals[j] = p->vals[j+1];
+                            p->vals[j] = move(p->vals[j+1]);
                             if (j + 2 <= p->numItems)
                             {
                                 p->connectChild(j+1, p->disconnectChild(j+2));
@@ -361,7 +362,7 @@ private:
                     }
 
                     // delete p->vals[p->numItems - 1];
-                    markedData.push_back(p->vals[p->numItems - 1]);
+                    // markedData.push_back(p->vals[p->numItems - 1]);
                     p->vals[p->numItems - 1] = nullptr; 
                     p->numItems = p->numItems - 1; 
 
@@ -381,15 +382,15 @@ private:
                 }
                 else if (p->childs[i] == sibling && siblingSide == 'r')
                 {
-                    Data<T>* d = p->vals[i-1];
-                    sibling->insertAtFront(d); // todo
+                    unique_ptr<Data<T>> d = move(p->vals[i-1]);
+                    sibling->insertAtFront(move(d)); // todo
                     sibling->connectChild(0, node->disconnectChild(0));
                     p->disconnectChild(0);
                     p->connectChild(0, p->disconnectChild(1));
 
                     for (int j = i; j < p->numItems; j++)
                     {
-                        p->vals[j-1] = p->vals[j];
+                        p->vals[j-1] = move(p->vals[j]);
                         if (j + 1 <= p->numItems)
                         {
                             p->connectChild(j, p->disconnectChild(j+1));
@@ -397,7 +398,7 @@ private:
                     }
 
                     // delete p->vals[p->numItems - 1];
-                    markedData.push_back(p->vals[p->numItems - 1]);
+                    //markedData.push_back(p->vals[p->numItems - 1]);
                     p->vals[p->numItems - 1] = nullptr; 
                     p->numItems = p->numItems - 1;
 
@@ -437,12 +438,12 @@ private:
                     node->numItems = node->numItems - 1;
                     node->connectChild(1, node->disconnectChild(0));
                     node->connectChild(0, sibling->disconnectChild(sibling->numItems));
-                    node->vals[0] = p->vals[i];
+                    node->vals[0] = move(p->vals[i]);
 
-                    p->vals[i] = sibling->vals[f];
+                    p->vals[i] = move(sibling->vals[f]);
 
                     // delete sibling->vals[sibling->numItems - 1];
-                    markedData.push_back(sibling->vals[sibling->numItems - 1]);
+                    // markedData.push_back(sibling->vals[sibling->numItems - 1]);
                     sibling->vals[sibling->numItems - 1] = nullptr;
                     sibling->numItems = sibling->numItems - 1;
 
@@ -452,21 +453,21 @@ private:
                 if (p->childs[i] == sibling && siblingSide == 'r')
                 {
                     node->numItems = node->numItems + 1; 
-                    node->vals[0] = p->vals[i-1];
-                    p->vals[i-1] = sibling->vals[f];
+                    node->vals[0] = move(p->vals[i-1]);
+                    p->vals[i-1] = move(sibling->vals[f]);
                     node->connectChild(1, sibling->disconnectChild(f));
 
                     for (int j = 0; j < sibling->numItems; j++)
                     {
                         if (j + 1 < sibling->numItems)
                         {
-                            sibling->vals[j] = sibling->vals[j+1];
+                            sibling->vals[j] = move(sibling->vals[j+1]);
                         }
                         sibling->connectChild(j, sibling->disconnectChild(j+1));
                     }
 
                     // delete sibling->vals[sibling->numItems - 1];
-                    markedData.push_back(sibling->vals[sibling->numItems - 1]);
+                    // markedData.push_back(sibling->vals[sibling->numItems - 1]);
                     sibling->vals[sibling->numItems - 1] = nullptr;
                     sibling->numItems = sibling->numItems - 1;
 
@@ -493,7 +494,7 @@ public:
     void Insert(const T& val)
     {
         Node<T>* curr = root;
-        Data<T>* data = new Data<T>(val);
+        unique_ptr<Data<T>> data(new Data<T>(val));
 
         while (true)
         {
@@ -514,7 +515,7 @@ public:
             
         }
 
-        curr->insertItem(data); 
+        curr->insertItem(move(data)); 
     }
 
     bool Search(const T& val)
@@ -580,7 +581,7 @@ public:
             Node<T>* n = getNextChild(node, val);
             Node<T>* c = getInorderNode(n);
 
-            Data<T>* d = c->vals[0];
+            unique_ptr<Data<T>> d = move(c->vals[0]);
             int k = d->val;
             Remove(c, k);
 

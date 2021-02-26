@@ -8,9 +8,9 @@
             "args": [
                 "-std=c++17",
                 "-g",
-                "${fileDirname}/Tree.cpp",
+                "Tree.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "Tree"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

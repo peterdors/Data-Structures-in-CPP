@@ -13,6 +13,9 @@ int main(void)
     {
         t.Insert(val); 
     }
+    
+    t.recDisplay();
+
 
     // for (int val : vals)
     // {
@@ -22,17 +25,17 @@ int main(void)
     
     // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
     
-    for (int val : vals)
-    {
-        // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
-        cout << "Removing " << val << ": " << t.Remove(val) << endl;
-        // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
-    }
+    // for (int val : vals)
+    // {
+    //     // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
+    //     cout << "Removing " << val << ": " << t.Remove(val) << endl;
+    //     // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
+    // }
 
     // cout << "Removing " << 0 << ": " << t.Remove(0) << endl;
     
     // t.inorder();
-    t.recDisplay();
+    // t.recDisplay();
 
     return 0; 
 }
