@@ -13,19 +13,17 @@ template <class T>
 class Tree
 {
 private:
-    Node<T>* root;
+    shared_ptr<Node<T>> root;
     // unique_ptr<Node<T>> root; 
     vector<Node<T>*> markedNodes;
     vector<Data<T>*> markedData;
 
-    Node<T>* getNextChild(Node<T>* node, T val)
+    shared_ptr<Node<T>> getNextChild(shared_ptr<Node<T>> node, T val)
     {
         int i;
         for (i = 0; i < node->numItems; i++)
         {
-            if (
-                // node->vals[i] != nullptr && 
-            val < node->vals[i]->val)
+            if (val < node->vals[i]->val)
             {
                 return node->childs[i];
             }
@@ -34,23 +32,26 @@ private:
         return node->childs[i];
     }
 
-    void split(Node<T>* currNode)
+    void split(shared_ptr<Node<T>> currNode)
     {
         unique_ptr<Data<T>> itemB, itemC; 
-        Node<T>* parent, *child2, *child3; 
+        shared_ptr<Node<T>> parent;
+        shared_ptr<Node<T>> child2 (currNode->disconnectChild(2));
+        shared_ptr<Node<T>> child3 (currNode->disconnectChild(3)); 
 
         itemC = move(currNode->removeItem());
         itemB = move(currNode->removeItem()); 
 
-        child2 = currNode->disconnectChild(2);
-        child3 = currNode->disconnectChild(3);
+        // child2 = currNode->disconnectChild(2);
+        // child3 = currNode->disconnectChild(3);
 
-        Node<T>* newRight = new Node<T>();
+        shared_ptr<Node<T>> newRight (new Node<T>());
 
         if (currNode == root)
         {
-            root = new Node<T>(); 
-            parent = root; 
+            shared_ptr<Node<T>> temp (new Node<T>());
+            root = temp; 
+            parent = root;
             root->connectChild(0, currNode);
         }
         else
@@ -63,7 +64,7 @@ private:
 
         for (int i = n-1; i > itemIndex; i--)
         {
-            Node<T>* temp = parent->disconnectChild(i);
+            shared_ptr<Node<T>> temp (parent->disconnectChild(i));
             parent->connectChild(i+1, temp);
         }
 
@@ -75,7 +76,7 @@ private:
     }
 
 
-    void recDisplay(Node<T>* curr, int level, int childNum)
+    void recDisplay(shared_ptr<Node<T>> curr, int level, int childNum)
     {
         if (curr == nullptr)
         {
@@ -92,7 +93,7 @@ private:
 
         for (int i = 0; i < curr->numItems + 1; i++)
         {
-            Node<T>* next = curr->childs[i]; 
+            shared_ptr<Node<T>> next (curr->childs[i]); 
             if (next == nullptr)
             {
                 return;
@@ -179,8 +180,8 @@ private:
             //     delete node->vals[i]; 
             // }
 
-            ForestFire(node->childs[i]);
-            delete node->childs[i];
+            // ForestFire(node->childs[i]);
+            // delete node->childs[i];
         }
 
         // if (node != nullptr)
@@ -320,7 +321,8 @@ private:
             }
         }
         
-        root = new Node<T>();
+        shared_ptr<Node<T>> temp (new Node<T>());
+        root = temp;
         return node;
     }
 
@@ -482,19 +484,19 @@ private:
 public:
     Tree()
     {
-        root = new Node<T>(); 
+        root = make_shared<Node<T>>(Node<T>()); 
     }
 
     ~Tree()
     {
-        ForestFire(root);
-        delete root;
+        // ForestFire(root);
+        // delete root;
     }
 
     void Insert(const T& val)
     {
-        Node<T>* curr = root;
-        unique_ptr<Data<T>> data(new Data<T>(val));
+        shared_ptr<Node<T>> curr (root);
+        unique_ptr<Data<T>> data (new Data<T>(val));
 
         while (true)
         {

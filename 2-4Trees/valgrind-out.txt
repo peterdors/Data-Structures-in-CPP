@@ -1,126 +1,555 @@
-==31672== Memcheck, a memory error detector
-==31672== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==31672== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==31672== Command: ./Tree
-==31672== Parent PID: 7366
-==31672== 
---31672-- 
---31672-- Valgrind options:
---31672--    --leak-check=full
---31672--    --show-leak-kinds=all
---31672--    --track-origins=yes
---31672--    --verbose
---31672--    --log-file=valgrind-out.txt
---31672-- Contents of /proc/version:
---31672--   Linux version 5.8.0-36-generic (buildd@lgw01-amd64-027) (gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #40~20.04.1-Ubuntu SMP Wed Jan 6 10:15:55 UTC 2021
---31672-- 
---31672-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---31672-- Page sizes: currently 4096, max supported 4096
---31672-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---31672-- Reading syms from /home/peter/Desktop/Data-Structures-in-CPP/2-4Trees/Tree
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---31672--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---31672--   .. CRC mismatch (computed 6cded93a wanted 1af57820)
---31672--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---31672--   .. CRC mismatch (computed 6cded93a wanted 1af57820)
---31672--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---31672--   .. CRC is valid
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---31672--    object doesn't have a symbol table
---31672--    object doesn't have a dynamic symbol table
---31672-- Scheduler: using generic scheduler lock implementation.
---31672-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==31672== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-31672-by-peter-on-???
-==31672== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-31672-by-peter-on-???
-==31672== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-31672-by-peter-on-???
-==31672== 
-==31672== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==31672== don't want to do, unless you know exactly what you're doing,
-==31672== or are doing some strange experiment):
-==31672==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=31672 ...command...
-==31672== 
-==31672== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==31672==   /path/to/gdb ./Tree
-==31672== and then give GDB the following command
-==31672==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=31672
-==31672== --pid is optional if only one valgrind process is running
-==31672== 
---31672-- REDIR: 0x4022d80 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---31672-- REDIR: 0x4022b50 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---31672--    object doesn't have a symbol table
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---31672--    object doesn't have a symbol table
-==31672== WARNING: new redirection conflicts with existing -- ignoring it
---31672--     old: 0x04022d80 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---31672--     new: 0x04022d80 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---31672-- REDIR: 0x401f560 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---31672-- REDIR: 0x40232e0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
---31672--    object doesn't have a symbol table
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
---31672--    object doesn't have a symbol table
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---31672--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---31672--   .. CRC mismatch (computed cd1655d1 wanted 09373696)
---31672--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---31672--   .. CRC mismatch (computed cd1655d1 wanted 09373696)
---31672--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---31672--   .. CRC is valid
---31672-- Reading syms from /usr/lib/x86_64-linux-gnu/libm-2.31.so
---31672--   Considering /usr/lib/x86_64-linux-gnu/libm-2.31.so ..
---31672--   .. CRC mismatch (computed b88da5c9 wanted 1658d783)
---31672--   Considering /lib/x86_64-linux-gnu/libm-2.31.so ..
---31672--   .. CRC mismatch (computed b88da5c9 wanted 1658d783)
---31672--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.31.so ..
---31672--   .. CRC is valid
---31672-- REDIR: 0x4b0a600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0bdd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b26e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b269a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b092d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a6c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b26960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b097f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b093b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0aad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b280d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b269e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b099a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b097b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b12d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a9d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b26ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b09c60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a8d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0a870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0be10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4b0aa20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---31672-- REDIR: 0x4bf2490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---31672-- REDIR: 0x4b04260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---31672-- REDIR: 0x4bf2660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
---31672-- REDIR: 0x4beec50 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
---31672-- REDIR: 0x4bedb60 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
---31672-- REDIR: 0x4915c10 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x483bdf0 (operator new(unsigned long))
---31672-- REDIR: 0x4bf5650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
---31672-- REDIR: 0x4913e70 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x483d160 (operator delete(void*, unsigned long))
---31672-- REDIR: 0x4b04850 (libc.so.6:free) redirected to 0x483c9d0 (free)
-==31672== 
-==31672== HEAP SUMMARY:
-==31672==     in use at exit: 0 bytes in 0 blocks
-==31672==   total heap usage: 23 allocs, 23 frees, 74,356 bytes allocated
-==31672== 
-==31672== All heap blocks were freed -- no leaks are possible
-==31672== 
-==31672== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==31567== Memcheck, a memory error detector
+==31567== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31567== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==31567== Command: ./Tree
+==31567== Parent PID: 12160
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x109DCC: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:729)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==  Address 0x4dc1fb8 is 40 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x109DD8: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==  Address 0x4dc1fb8 is 40 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 4
+==31567==    at 0x10963A: __gnu_cxx::__exchange_and_add_single(int*, int) (atomicity.h:67)
+==31567==    by 0x1096B4: __gnu_cxx::__exchange_and_add_dispatch(int*, int) (atomicity.h:84)
+==31567==    by 0x10AF62: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:152)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Address 0x4dc2848 is 8 bytes inside a block of size 24 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C988: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr() (shared_ptr_base.h:368)
+==31567==    by 0x10C9EA: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_destroy() (shared_ptr_base.h:381)
+==31567==    by 0x10AFB9: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:171)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A652: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:54)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid read of size 4
+==31567==    at 0x109643: __gnu_cxx::__exchange_and_add_single(int*, int) (atomicity.h:68)
+==31567==    by 0x1096B4: __gnu_cxx::__exchange_and_add_dispatch(int*, int) (atomicity.h:84)
+==31567==    by 0x10AF62: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:152)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Address 0x4dc2848 is 8 bytes inside a block of size 24 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C988: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr() (shared_ptr_base.h:368)
+==31567==    by 0x10C9EA: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_destroy() (shared_ptr_base.h:381)
+==31567==    by 0x10AFB9: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:171)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A652: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:54)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid write of size 4
+==31567==    at 0x10964E: __gnu_cxx::__exchange_and_add_single(int*, int) (atomicity.h:68)
+==31567==    by 0x1096B4: __gnu_cxx::__exchange_and_add_dispatch(int*, int) (atomicity.h:84)
+==31567==    by 0x10AF62: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:152)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Address 0x4dc2848 is 8 bytes inside a block of size 24 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C988: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr() (shared_ptr_base.h:368)
+==31567==    by 0x10C9EA: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_destroy() (shared_ptr_base.h:381)
+==31567==    by 0x10AFB9: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:171)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A652: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:54)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x10A125: std::unique_ptr<Data<int>, std::default_delete<Data<int> > >::~unique_ptr() (unique_ptr.h:291)
+==31567==    by 0x109898: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Address 0x4dc1fa8 is 24 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid write of size 8
+==31567==    at 0x10A15A: std::unique_ptr<Data<int>, std::default_delete<Data<int> > >::~unique_ptr() (unique_ptr.h:293)
+==31567==    by 0x109898: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Address 0x4dc1fa8 is 24 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid free() / delete / delete[] / realloc()
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Address 0x4dc1f90 is 0 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x109DCC: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:729)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109854: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10B654: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A873: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:73)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==  Address 0x4dc1fc8 is 56 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x109DD8: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109854: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10B654: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A873: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:73)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==  Address 0x4dc1fc8 is 56 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x109A2E: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr(std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1167)
+==31567==    by 0x109A7C: std::shared_ptr<Node<int> >::shared_ptr(std::shared_ptr<Node<int> > const&) (shared_ptr.h:129)
+==31567==    by 0x10AA42: Node<int>::getParent() (Node.hpp:59)
+==31567==    by 0x109B4D: Tree<int>::Insert(int const&) (Tree.hpp:504)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc1fb0 is 32 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x10A25E: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count(std::__shared_count<(__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:734)
+==31567==    by 0x109A52: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr(std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1167)
+==31567==    by 0x109A7C: std::shared_ptr<Node<int> >::shared_ptr(std::shared_ptr<Node<int> > const&) (shared_ptr.h:129)
+==31567==    by 0x10AA42: Node<int>::getParent() (Node.hpp:59)
+==31567==    by 0x109B4D: Tree<int>::Insert(int const&) (Tree.hpp:504)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc1fb8 is 40 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10CC29: void __gnu_cxx::new_allocator<Node<int> >::destroy<Node<int> >(Node<int>*) (new_allocator.h:153)
+==31567==    by 0x10CBF4: void std::allocator_traits<std::allocator<Node<int> > >::destroy<Node<int> >(std::allocator<Node<int> >&, Node<int>*) (alloc_traits.h:497)
+==31567==    by 0x10CAAE: std::_Sp_counted_ptr_inplace<Node<int>, std::allocator<Node<int> >, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:557)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x109414: main (Tree.cpp:14)
+==31567== 
+==31567== Invalid read of size 4
+==31567==    at 0x109664: __gnu_cxx::__atomic_add_single(int*, int) (atomicity.h:74)
+==31567==    by 0x1096F8: __gnu_cxx::__atomic_add_dispatch(int*, int) (atomicity.h:98)
+==31567==    by 0x10B3CE: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_add_ref_copy() (shared_ptr_base.h:139)
+==31567==    by 0x10A282: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count(std::__shared_count<(__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:737)
+==31567==    by 0x109A52: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr(std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1167)
+==31567==    by 0x109A7C: std::shared_ptr<Node<int> >::shared_ptr(std::shared_ptr<Node<int> > const&) (shared_ptr.h:129)
+==31567==    by 0x10AA42: Node<int>::getParent() (Node.hpp:59)
+==31567==    by 0x109B4D: Tree<int>::Insert(int const&) (Tree.hpp:504)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc2848 is 8 bytes inside a block of size 24 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C988: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr() (shared_ptr_base.h:368)
+==31567==    by 0x10C9EA: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_destroy() (shared_ptr_base.h:381)
+==31567==    by 0x10AFB9: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:171)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A652: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:54)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid write of size 4
+==31567==    at 0x10966F: __gnu_cxx::__atomic_add_single(int*, int) (atomicity.h:74)
+==31567==    by 0x1096F8: __gnu_cxx::__atomic_add_dispatch(int*, int) (atomicity.h:98)
+==31567==    by 0x10B3CE: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_add_ref_copy() (shared_ptr_base.h:139)
+==31567==    by 0x10A282: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count(std::__shared_count<(__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:737)
+==31567==    by 0x109A52: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr(std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1167)
+==31567==    by 0x109A7C: std::shared_ptr<Node<int> >::shared_ptr(std::shared_ptr<Node<int> > const&) (shared_ptr.h:129)
+==31567==    by 0x10AA42: Node<int>::getParent() (Node.hpp:59)
+==31567==    by 0x109B4D: Tree<int>::Insert(int const&) (Tree.hpp:504)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc2848 is 8 bytes inside a block of size 24 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C988: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::~_Sp_counted_ptr() (shared_ptr_base.h:368)
+==31567==    by 0x10C9EA: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_destroy() (shared_ptr_base.h:381)
+==31567==    by 0x10AFB9: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:171)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10B748: Node<int>::connectChild(int, std::shared_ptr<Node<int> >) (Node.hpp:113)
+==31567==    by 0x10A652: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:54)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid read of size 4
+==31567==    at 0x10AA78: Tree<int>::getNextChild(std::shared_ptr<Node<int> >, int) (Tree.hpp:24)
+==31567==    by 0x109B9B: Tree<int>::Insert(int const&) (Tree.hpp:505)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc2730 is 0 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid read of size 8
+==31567==    at 0x10BF68: std::__uniq_ptr_impl<Data<int>, std::default_delete<Data<int> > >::_M_ptr() const (unique_ptr.h:154)
+==31567==    by 0x10BBD3: std::unique_ptr<Data<int>, std::default_delete<Data<int> > >::get() const (unique_ptr.h:361)
+==31567==    by 0x10B767: std::unique_ptr<Data<int>, std::default_delete<Data<int> > >::operator->() const (unique_ptr.h:355)
+==31567==    by 0x10AAA8: Tree<int>::getNextChild(std::shared_ptr<Node<int> >, int) (Tree.hpp:26)
+==31567==    by 0x109B9B: Tree<int>::Insert(int const&) (Tree.hpp:505)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x4dc2738 is 8 bytes inside a block of size 112 free'd
+==31567==    at 0x483D1CF: operator delete(void*, unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C9BE: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==    by 0x109866: Node<int>::~Node() (Node.hpp:10)
+==31567==    by 0x10C9B1: std::_Sp_counted_ptr<Node<int>*, (__gnu_cxx::_Lock_policy)2>::_M_dispose() (shared_ptr_base.h:377)
+==31567==    by 0x10AF83: std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() (shared_ptr_base.h:155)
+==31567==    by 0x109DE2: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count() (shared_ptr_base.h:730)
+==31567==    by 0x10972D: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::~__shared_ptr() (shared_ptr_base.h:1169)
+==31567==    by 0x10974D: std::shared_ptr<Node<int> >::~shared_ptr() (shared_ptr.h:103)
+==31567==  Block was alloc'd at
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10A5EA: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== Invalid read of size 4
+==31567==    at 0x10AAA9: Tree<int>::getNextChild(std::shared_ptr<Node<int> >, int) (Tree.hpp:26)
+==31567==    by 0x109B9B: Tree<int>::Insert(int const&) (Tree.hpp:505)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==31567== 
+==31567== 
+==31567== Process terminating with default action of signal 11 (SIGSEGV)
+==31567==  Access not within mapped region at address 0x0
+==31567==    at 0x10AAA9: Tree<int>::getNextChild(std::shared_ptr<Node<int> >, int) (Tree.hpp:26)
+==31567==    by 0x109B9B: Tree<int>::Insert(int const&) (Tree.hpp:505)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567==  If you believe this happened as a result of a stack
+==31567==  overflow in your program's main thread (unlikely but
+==31567==  possible), you can try to increase the size of the
+==31567==  main thread stack using the --main-stacksize= flag.
+==31567==  The main thread stack size used in this run was 8388608.
+==31567== 
+==31567== HEAP SUMMARY:
+==31567==     in use at exit: 28 bytes in 2 blocks
+==31567==   total heap usage: 32 allocs, 37 frees, 73,880 bytes allocated
+==31567== 
+==31567== 4 bytes in 1 blocks are still reachable in loss record 1 of 2
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x109AC0: Tree<int>::Insert(int const&) (Tree.hpp:497)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== 24 bytes in 1 blocks are still reachable in loss record 2 of 2
+==31567==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31567==    by 0x10C185: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*) (shared_ptr_base.h:625)
+==31567==    by 0x10BF34: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<Node<int>*>(Node<int>*, std::integral_constant<bool, false>) (shared_ptr_base.h:636)
+==31567==    by 0x10BB6A: std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<Node<int>, void>(Node<int>*) (shared_ptr_base.h:1125)
+==31567==    by 0x10B635: std::enable_if<std::__sp_is_constructible<Node<int>, Node<int> >::value, void>::type std::__shared_ptr<Node<int>, (__gnu_cxx::_Lock_policy)2>::reset<Node<int> >(Node<int>*) (shared_ptr_base.h:1295)
+==31567==    by 0x10A600: Tree<int>::split(std::shared_ptr<Node<int> >) (Tree.hpp:52)
+==31567==    by 0x109B23: Tree<int>::Insert(int const&) (Tree.hpp:503)
+==31567==    by 0x1094B0: main (Tree.cpp:20)
+==31567== 
+==31567== LEAK SUMMARY:
+==31567==    definitely lost: 0 bytes in 0 blocks
+==31567==    indirectly lost: 0 bytes in 0 blocks
+==31567==      possibly lost: 0 bytes in 0 blocks
+==31567==    still reachable: 28 bytes in 2 blocks
+==31567==         suppressed: 0 bytes in 0 blocks
+==31567== 
+==31567== For lists of detected and suppressed errors, rerun with: -s
+==31567== ERROR SUMMARY: 142 errors from 17 contexts (suppressed: 0 from 0)

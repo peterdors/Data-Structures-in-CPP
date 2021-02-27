@@ -16,10 +16,13 @@ struct Node
     // this instance of a node(?)
     // Data<T>* vals[ORDER-1]; // consider wrapping in struct
     unique_ptr<Data<T>> vals[ORDER-1];
+    
     // Parent would be a shared pointer because multiple nodes can have the same parent. 
-    Node<T>* parent;
+    shared_ptr<Node<T>> parent;
     // Childs would be unique pointers because a parent is the owner of the childs. 
-    Node<T>* childs[ORDER];
+    // Note: trying to work with shared pointers on the parent might require us 
+    // to use the shared pointer object for childs. 
+    shared_ptr<Node<T>> childs[ORDER];
 
     Node<T>() 
     {
@@ -30,7 +33,7 @@ struct Node
             childs[i] = nullptr;
             if (i < ORDER - 1)
             {
-                vals[i] = nullptr;
+                vals[i] = move(nullptr);
             }
         }
     }
@@ -51,7 +54,7 @@ struct Node
         return parent == nullptr && childs[0] == nullptr && numItems <= 1;
     }
 
-    Node<T>* getParent()
+    shared_ptr<Node<T>> getParent()
     {
         return this->parent;
     }
@@ -86,27 +89,29 @@ struct Node
 
     unique_ptr<Data<T>> removeItem()
     {
-        unique_ptr<Data<T>> data = move(vals[numItems - 1]); 
-        vals[numItems - 1] = move(nullptr);
+        // unique_ptr<Data<T>> data = move(vals[numItems - 1]); 
+        // vals[numItems - 1] = move(nullptr);
         numItems--;
 
-        return move(data); 
+        // return move(data);
+        return move(vals[numItems]); 
     }
 
-    Node<T>* disconnectChild(int childNum)
+    shared_ptr<Node<T>> disconnectChild(int childNum)
     {
-        Node<T>* node = childs[childNum];
+        shared_ptr<Node<T>> node (childs[childNum]);
         childs[childNum] = nullptr;
 
         return node;
     }
 
-    void connectChild(int childNum, Node<T>* child)
+    void connectChild(int childNum, shared_ptr<Node<T>> child)
     {
         childs[childNum] = child;
         if (child != nullptr)
         {
-            child->parent = this;
+            shared_ptr<Node<T>> temp (this);
+            child->parent = temp;
         } 
     }
 
